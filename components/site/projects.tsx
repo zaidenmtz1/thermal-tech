@@ -2,33 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ButtonLink } from '@/components/site/button-link'
 import { Reveal } from '@/components/site/reveal'
-
-const projects = [
-  {
-    title: 'Stainless clad vessels',
-    type: 'Industrial',
-    image: '/images/stainless-vessels.webp',
-    alt: 'Two horizontal stainless clad vessels with insulated piping',
-  },
-  {
-    title: 'Vessel head jacketing',
-    type: 'Refrigeration',
-    image: '/images/tank-top.webp',
-    alt: 'Top of an insulated tank with radial jacketing seams',
-  },
-  {
-    title: 'Heat exchanger cladding',
-    type: 'Industrial',
-    image: '/images/white-vessel.webp',
-    alt: 'White jacketed heat exchanger and piping in a mechanical room',
-  },
-  {
-    title: 'Overhead ductwork',
-    type: 'Commercial',
-    image: '/images/night-building.webp',
-    alt: 'Insulated ductwork inside a steel frame building at night',
-  },
-]
+import { projects } from '@/lib/work'
 
 export function Projects() {
   return (

@@ -52,6 +52,8 @@ export function Header() {
   }, [menuOpen])
 
   const openItem = navItems.find((item) => item.label === activeMenu && item.groups)
+  const onHome = pathname === '/'
+  const solid = !onHome || scrolled || menuOpen || activeMenu !== null
 
   return (
     <>
@@ -64,29 +66,31 @@ export function Header() {
           }
         }}
         className={cn(
-          'sticky top-0 z-50 bg-background transition-shadow duration-300',
-          scrolled && 'shadow-[0_10px_30px_-18px_rgb(0_0_0/0.4)]',
+          'sticky top-0 z-50 border-b transition-[background-color,box-shadow,border-color] duration-300',
+          solid
+            ? 'border-border bg-background'
+            : 'border-transparent bg-transparent',
+          solid && scrolled && 'shadow-[0_10px_30px_-18px_rgb(0_0_0/0.4)]',
         )}
       >
-        <div className="border-b border-border">
-          <div className="mx-auto flex h-20 w-full max-w-7xl items-stretch justify-between gap-6 px-5 sm:px-8 lg:h-24 2xl:gap-8">
+        <div className="mx-auto flex h-[var(--header-height)] w-full max-w-7xl items-stretch justify-between gap-6 px-5 sm:px-8">
             <Link
               href="/"
               aria-label="Thermal Tech Inc. home"
               className="flex shrink-0 items-center"
             >
               <Image
-                src="/logo.webp"
+                src={solid ? '/logo-blue.png' : '/logo-white.png'}
                 alt="Thermal Tech Inc. Pipe and Vessel Insulators"
-                width={365}
-                height={100}
+                width={1024}
+                height={342}
                 priority
-                className="h-11 w-auto sm:h-12 lg:h-14 xl:h-12 2xl:h-14"
+                className="h-11 w-auto sm:h-[3.025rem]"
               />
             </Link>
 
             <nav aria-label="Primary" className="hidden xl:block">
-              <ul className="flex h-full items-stretch gap-1 2xl:gap-2">
+              <ul className="flex h-full items-stretch gap-6 2xl:gap-8">
                 {navItems.map((item) => {
                   const active = isActive(item, pathname)
                   const open = activeMenu === item.label
@@ -100,8 +104,12 @@ export function Header() {
                         onMouseEnter={() => setActiveMenu(item.groups ? item.label : null)}
                         onFocus={() => setActiveMenu(item.groups ? item.label : null)}
                         className={cn(
-                          'flex items-center gap-1 whitespace-nowrap px-2.5 text-sm font-semibold uppercase tracking-[0.05em] transition-colors 2xl:gap-1.5 2xl:px-4 2xl:text-[15px] 2xl:tracking-[0.07em]',
-                          active || open ? 'text-primary' : 'text-foreground hover:text-primary',
+                          'relative flex h-full items-center font-sans text-[13px] font-semibold uppercase tracking-[0.08em] transition-colors',
+                          solid
+                            ? active || open
+                              ? 'text-primary'
+                              : 'text-foreground hover:text-primary'
+                            : 'text-white hover:text-white/75',
                         )}
                       >
                         {item.label}
@@ -109,7 +117,7 @@ export function Header() {
                       <span
                         aria-hidden="true"
                         className={cn(
-                          'absolute inset-x-0 bottom-0 h-1 origin-left bg-primary transition-transform duration-300',
+                          'absolute inset-x-0 bottom-0 h-0.5 origin-left bg-primary transition-transform duration-300',
                           active || open ? 'scale-x-100' : 'scale-x-0',
                         )}
                       />
@@ -119,15 +127,21 @@ export function Header() {
               </ul>
             </nav>
 
-            <div className="hidden items-center gap-5 xl:flex 2xl:gap-7">
+            <div className="hidden items-center gap-5 xl:flex 2xl:gap-6">
               <a
                 href={site.phoneHref}
-                className="flex items-center gap-2 whitespace-nowrap text-[15px] font-semibold tracking-wide text-foreground transition-colors hover:text-primary"
+                className={cn(
+                  'inline-flex items-center gap-2 whitespace-nowrap text-[13px] font-semibold tracking-wide transition-colors 2xl:text-sm',
+                  solid ? 'text-foreground hover:text-primary' : 'text-white hover:text-white/75',
+                )}
               >
-                <Phone aria-hidden="true" className="size-4 text-primary" />
+                <Phone aria-hidden="true" className="size-3.5" />
                 {site.phone}
               </a>
-              <ButtonLink href="/contact" className="h-12 px-5 2xl:px-7">
+              <ButtonLink
+                href="/request-a-quote"
+                className="h-10 rounded-sm px-4 text-[11px] font-bold tracking-[0.14em] [&_svg]:size-3.5"
+              >
                 Request a quote
               </ButtonLink>
             </div>
@@ -138,22 +152,23 @@ export function Header() {
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-              className="relative -mr-2 flex size-12 items-center justify-center self-center xl:hidden"
+              className="relative -mr-2 flex size-11 items-center justify-center self-center xl:hidden"
             >
               <span
                 className={cn(
-                  'absolute h-0.5 w-7 bg-foreground transition-transform duration-300',
+                  'absolute h-0.5 w-6 transition-transform duration-300',
+                  solid ? 'bg-foreground' : 'bg-white',
                   menuOpen ? 'rotate-45' : '-translate-y-1.5',
                 )}
               />
               <span
                 className={cn(
-                  'absolute h-0.5 w-7 bg-foreground transition-transform duration-300',
+                  'absolute h-0.5 w-6 transition-transform duration-300',
+                  solid ? 'bg-foreground' : 'bg-white',
                   menuOpen ? '-rotate-45' : 'translate-y-1.5',
                 )}
               />
             </button>
-          </div>
         </div>
 
         {openItem?.groups && (
@@ -210,7 +225,7 @@ export function Header() {
       <div
         id="mobile-menu"
         className={cn(
-          'fixed inset-x-0 bottom-0 top-20 z-40 overflow-y-auto bg-ink text-ink-foreground transition-all duration-300 xl:hidden',
+          'fixed inset-x-0 bottom-0 top-[var(--header-height)] z-40 overflow-y-auto bg-ink text-ink-foreground transition-all duration-300 xl:hidden',
           menuOpen ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-2 opacity-0',
         )}
       >
@@ -285,7 +300,7 @@ export function Header() {
             })}
           </ul>
           <div className="mt-8 flex flex-col gap-3">
-            <ButtonLink href="/contact" className="w-full">
+            <ButtonLink href="/request-a-quote" className="w-full font-bold">
               Request a quote
             </ButtonLink>
             <a

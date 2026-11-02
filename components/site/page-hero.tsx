@@ -69,7 +69,7 @@ export function PageHero({ crumbs, title, description, image, imageAlt, anchors 
             className="animate-rise mt-8 flex flex-col gap-3 sm:flex-row"
             style={{ '--delay': '500ms' } as React.CSSProperties}
           >
-            <ButtonLink href="/contact" className="h-14 px-8">
+            <ButtonLink href="/request-a-quote" className="h-14 px-8">
               Request a quote
             </ButtonLink>
             <ButtonLink href="/projects" variant="outline" className="h-14 px-8">

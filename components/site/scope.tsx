@@ -91,7 +91,7 @@ export function Scope() {
             Hover or tap a system to see the work. Each scope is detailed for
             temperature, environment, and how your crew needs to reach it later.
           </p>
-          <ButtonLink href="/contact" className="mt-8 w-full sm:w-auto">
+          <ButtonLink href="/request-a-quote" className="mt-8 w-full sm:w-auto">
             Request a quote
           </ButtonLink>
         </Reveal>

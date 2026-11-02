@@ -33,7 +33,7 @@ export const navItems: NavItem[] = [
       {
         heading: 'Get in touch',
         links: [
-          { label: 'Request a quote', href: '/contact' },
+          { label: 'Request a quote', href: '/request-a-quote' },
           { label: 'Contact', href: '/contact' },
           { label: 'Service area', href: '/about#service-area' },
         ],
@@ -58,7 +58,7 @@ export const navItems: NavItem[] = [
         links: [
           { label: 'Metal jacketing', href: '/industrial#jacketing' },
           { label: 'Refrigeration lines', href: '/industrial#refrigeration' },
-          { label: 'Request a quote', href: '/contact' },
+          { label: 'Request a quote', href: '/request-a-quote' },
         ],
       },
     ],
@@ -80,7 +80,7 @@ export const navItems: NavItem[] = [
         heading: 'Work with us',
         links: [
           { label: 'General contractors', href: '/commercial#contractors' },
-          { label: 'Request a quote', href: '/contact' },
+          { label: 'Request a quote', href: '/request-a-quote' },
         ],
       },
     ],
@@ -95,6 +95,8 @@ export const navItems: NavItem[] = [
         links: [
           { label: 'Insulation guides', href: '/resources' },
           { label: 'Company videos', href: '/#videos' },
+          { label: 'Projects', href: '/projects' },
+          { label: 'Gallery', href: '/gallery' },
         ],
       },
       {
@@ -106,6 +108,5 @@ export const navItems: NavItem[] = [
       },
     ],
   },
-  { label: 'FAQ', href: '/faq' },
   { label: 'Contact', href: '/contact' },
 ]

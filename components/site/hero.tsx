@@ -11,7 +11,7 @@ const quickLinks = [
 
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-[calc(100svh-80px)] flex-col overflow-hidden bg-ink text-ink-foreground lg:min-h-[calc(100svh-132px)]">
+    <section className="relative isolate -mt-[var(--header-height)] flex min-h-svh flex-col overflow-hidden bg-ink text-ink-foreground">
       <Image
         src="/images/vessel-closeup.webp"
         alt="Insulated vertical vessel with stainless jacketing and orange piping on a mechanical skid"
@@ -22,7 +22,7 @@ export function Hero() {
       />
       <div className="absolute inset-0 -z-10 bg-ink/70" />
 
-      <div className="relative mx-auto flex w-full max-w-7xl flex-1 items-end px-5 pb-12 pt-24 sm:px-8 lg:items-center lg:py-20">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-6 pt-28 sm:px-8 lg:py-20">
         <div className="max-w-xl lg:max-w-[42rem]">
           <div
             className="animate-grow-x mb-6 h-1 w-16 bg-primary"
@@ -46,7 +46,7 @@ export function Hero() {
             className="animate-rise mt-8 flex flex-col gap-3 sm:flex-row"
             style={{ '--delay': '520ms' } as React.CSSProperties}
           >
-            <ButtonLink href="/contact" className="h-14 px-8">
+            <ButtonLink href="/request-a-quote" className="h-14 px-8">
               Request a quote
             </ButtonLink>
             <ButtonLink href="/projects" variant="outline" className="h-14 px-8">

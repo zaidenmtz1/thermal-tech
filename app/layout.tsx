@@ -1,6 +1,8 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Barlow, Barlow_Condensed } from 'next/font/google'
+import { Barlow, Barlow_Condensed, Lexend } from 'next/font/google'
+import { AccessibilityWidget } from '@/components/site/accessibility-widget'
+import { ScrollToTop } from '@/components/site/scroll-to-top'
 import './globals.css'
 
 const barlowText = Barlow({
@@ -14,6 +16,13 @@ const barlow = Barlow_Condensed({
   subsets: ['latin'],
   weight: ['600', '700'],
   variable: '--font-barlow',
+  display: 'swap',
+})
+
+const lexend = Lexend({
+  subsets: ['latin'],
+  weight: ['400', '600'],
+  variable: '--font-lexend',
   display: 'swap',
 })
 
@@ -57,9 +66,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${barlowText.variable} ${barlow.variable} bg-background`}>
+    <html
+      lang="en"
+      className={`${barlowText.variable} ${barlow.variable} ${lexend.variable} bg-background`}
+    >
       <body>
+        <ScrollToTop />
         {children}
+        <AccessibilityWidget />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
